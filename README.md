@@ -71,11 +71,11 @@ Logistic Regression is the selected model for the included application because i
 From the repository root, install the required packages and start the app:
 
 ```bash
-pip install pandas scikit-learn streamlit joblib
+pip install -r requirements.txt
 streamlit run "Full Project/app.py"
 ```
 
-The application loads the serialized model and preprocessing artifacts from the `Full Project` directory, accepts the clinical inputs through a form, applies the saved feature order and scaler, and displays a low-risk or high-risk prediction.
+The application loads the serialized model and preprocessing artifacts from the `Full Project` directory, regardless of the directory from which Streamlit launches it. It accepts the clinical inputs through a form, applies the saved feature order and scaler, and displays a low-risk or high-risk prediction. Streamlit deployment uses the root `requirements.txt` file to install all runtime dependencies, including `joblib`.
 
 ## Re-run the notebook
 

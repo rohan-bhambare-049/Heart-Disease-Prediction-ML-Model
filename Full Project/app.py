@@ -1,10 +1,21 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from pathlib import Path
 
-model = joblib.load("Logistic_Heart.pkl")
-scaler = joblib.load("scaler.pkl")
-columns = joblib.load("columns.pkl")
+ARTIFACT_DIR = Path(__file__).resolve().parent
+
+
+@st.cache_resource
+def load_artifacts():
+    """Load the model and preprocessing artifacts shipped with this app."""
+    model = joblib.load(ARTIFACT_DIR / "Logistic_Heart.pkl")
+    scaler = joblib.load(ARTIFACT_DIR / "scaler.pkl")
+    columns = joblib.load(ARTIFACT_DIR / "columns.pkl")
+    return model, scaler, columns
+
+
+model, scaler, columns = load_artifacts()
 
 st.title("Heart Disease Prediction")
 
